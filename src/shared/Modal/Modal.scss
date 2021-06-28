@@ -1,0 +1,44 @@
+.custom-modal {
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 5% auto;
+        padding: 3rem;
+        border-radius: 8px;
+        width: 70%;
+        min-height: 600px;
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+
+            .close {
+                color: #aaa;
+                font-size: 28px;
+                font-weight: bold;
+
+                &:focus, &:hover {
+                    color: black;
+                    cursor: pointer;
+                }
+            }
+        }
+
+        .modal-footer{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-body {
+            padding: 16px;
+        }
+    }
+}

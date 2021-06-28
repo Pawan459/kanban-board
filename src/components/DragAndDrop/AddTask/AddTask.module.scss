@@ -1,0 +1,76 @@
+.add-task {
+  display: flex;
+  flex-direction: column;
+
+  .card {
+    .inline-text{
+      width: 100%;
+      min-height: 80px;
+      border: none;
+      outline: none;
+      padding: 10px 16px;
+      border-radius: 4px;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      box-sizing: border-box;
+
+      &.inline-group {
+        min-height: 60px;
+      }
+    }
+  }
+
+
+
+  .action-buttons {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+
+    button {
+      padding: 10px;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      white-space: nowrap;
+      font-size: 18px;
+      font-weight: 400;
+      transition: all 0.1s ease-in;
+      user-select: none;
+
+      &:hover{
+        cursor: pointer;
+      }
+    }
+
+    .close-btn {
+      background-color: transparent;
+      font-size: 45px;
+      padding: 0;
+      margin-left: 15px;
+      color: lightgray;
+    }
+
+    .add-action-btn {
+      width: 100%;
+      background-color: rgba(144, 238, 144, 0.6);
+
+      &:hover {
+         background-color: rgba(144, 238, 144, 1);
+      }
+
+      &.inline-active {
+        background-color: rgba(144, 146, 238, 0.6);
+        width: 120px;
+
+        &:hover {
+          background-color: rgba(144, 146, 238, 1);
+        }
+      }
+
+      .add {
+        margin-right: 10px;
+        font-size: 24px;
+      }
+    }
+  }
+}
