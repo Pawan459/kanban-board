@@ -1,9 +1,10 @@
 import styles from './AddTask.module.scss';
-import React, { useState } from "react";
+import React, { useRef, useState, useCallback } from "react";
 import { useDispatch } from 'react-redux';
 
 import { addTaskListGroup, updateTasksAtGroup } from '../../../reducers/tasklists/actions';
 import { getRandomColor } from '../../../utils/helper';
+import useOutsideAlerter from '../../../hooks/useOutsideAlerter';
 
 // component only specific to Drag and Drop
 export default function AddTask({
@@ -15,10 +16,10 @@ export default function AddTask({
   const [text, setText] = useState("");
   const [open, setOpen] = useState(false);
 
+  const parentRef = useRef(null);
+  const toggleCard = useCallback(() => setOpen(open => !open), [])
 
-  function toggleCard() {
-    setOpen(!open);
-  }
+  useOutsideAlerter(parentRef, toggleCard);
 
   const renderAddToCard = () => (
     <div className={styles['add-task']}>
@@ -51,7 +52,7 @@ export default function AddTask({
   }
 
   const renderInlineAddToCard = () => (
-    <div className={styles['add-task']}>
+    <div ref={parentRef} className={styles['add-task']}>
       <form onSubmit={addCardToList} className={styles['card']}>
         <input
           autoFocus

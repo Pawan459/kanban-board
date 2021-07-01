@@ -1,3 +1,4 @@
+import './BoardContainer.scss';
 import { Component } from 'react';
 
 import ErrorBoundary from '../../shared/ErrorBoundary/ErrorBoundary';
@@ -8,7 +9,10 @@ export default class BoardContainer extends Component {
   render() {
     return (
       <ErrorBoundary>
-        <DragAndDrop />
+        <div className="board-container">
+          <h1>Welcome To Kanban</h1>
+          <DragAndDrop />
+        </div>
       </ErrorBoundary>
     )
   }

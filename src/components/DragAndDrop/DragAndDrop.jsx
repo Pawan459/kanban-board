@@ -32,6 +32,7 @@ export default function DragAndDrop() {
   }, [taskList])
 
   const handleDragStart = (event) => {
+    event.dataTransfer.effectAllowed = 'move';
     const params = event.currentTarget.dataset;
 
     dragItem.current = params;
@@ -51,6 +52,7 @@ export default function DragAndDrop() {
   }
 
   const handleDragEnter = (event) => {
+    event.dataTransfer.dropEffect = 'move';
     const params = event.currentTarget.dataset;
     const { current } = dragItem;
 
@@ -58,19 +60,16 @@ export default function DragAndDrop() {
     const toIndex = params.itemIndex;
 
     if (toIndex > -1) {
-      const newTaskList = JSON.parse(JSON.stringify(taskList));
-      newTaskList[params.groupIndex].tasks.splice(
+      taskList[params.groupIndex].tasks.splice(
         toIndex,
         0,
-        ...newTaskList[current.groupIndex].tasks.splice(
+        ...taskList[current.groupIndex].tasks.splice(
           fromIndex,
           1
         )
       );
       dragItem.current = params;
-
-      //persisting the list
-      dispatch(updateTaskList(newTaskList));
+      dispatch(updateTaskList([...taskList]));
     }
   }
 
@@ -90,7 +89,7 @@ export default function DragAndDrop() {
         <div
           key={itemIndex}
           draggable
-          onDrag={() => setDragging(true)}
+          onDrag={!dragging ? (() => setDragging(true)) : null}
           data-item-index={itemIndex}
           data-group-index={groupIndex}
           onDragStart={(event) => handleDragStart(event)}
@@ -117,6 +116,7 @@ export default function DragAndDrop() {
         data-item-index={0}
         data-group-index={groupIndex}
         style={{ backgroundColor: group.color }}
+        onDragOver={(e) => e.preventDefault()}
         onDragEnter={!taskList[groupIndex].tasks.length && dragging ? ((event) => handleDragEnter(event)) : null}
       >
         <h2 className={styles["dnd-group-heading"]}>{group.title}</h2>
